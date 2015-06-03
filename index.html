@@ -6,7 +6,7 @@
     <title>loglevel by pimterry</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -29,7 +29,7 @@
       </header>
       <section>
         <h1>
-<a name="loglevel---" class="anchor" href="#loglevel---"><span class="octicon octicon-link"></span></a>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a> <a href="https://coveralls.io/r/pimterry/loglevel?branch=master"><img src="https://coveralls.io/repos/pimterry/loglevel/badge.png?branch=master" alt="Coverage Status"></a> <a href="https://david-dm.org/pimterry/loglevel#info=devDependencies&amp;view=table"><img src="https://david-dm.org/pimterry/loglevel/dev-status.png" alt="Dependency status"></a>
+<a id="loglevel----" class="anchor" href="#loglevel----" aria-hidden="true"><span class="octicon octicon-link"></span></a>loglevel <a href="https://npmjs.org/package/loglevel"><img src="https://img.shields.io/npm/v/loglevel.svg?style=flat" alt="NPM Version"></a> <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a> <a href="https://coveralls.io/r/pimterry/loglevel?branch=master"><img src="https://coveralls.io/repos/pimterry/loglevel/badge.png?branch=master" alt="Coverage Status"></a> <a href="https://david-dm.org/pimterry/loglevel#info=devDependencies&amp;view=table"><img src="https://david-dm.org/pimterry/loglevel/dev-status.png" alt="Dependency status"></a>
 </h1>
 
 <p>Minimal lightweight simple logging for JavaScript. loglevel replaces console.log() and friends with level-based logging and filtering, with none of console's downsides.</p>
@@ -37,10 +37,10 @@
 <p>This is a barebones reliable everyday logging library. It does not do fancy things, it does not let you reconfigure appenders or add complex log filtering rules or boil tea (more's the pity), but it does have the all core functionality that you actually use:</p>
 
 <h2>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
 
 <h3>
-<a name="simple" class="anchor" href="#simple"><span class="octicon octicon-link"></span></a>Simple</h3>
+<a id="simple" class="anchor" href="#simple" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple</h3>
 
 <ul>
 <li>Log things at a given level (trace/debug/info/warn/error) to the console object (as seen in all modern browsers &amp; node.js)</li>
@@ -49,7 +49,7 @@
 </ul>
 
 <h3>
-<a name="effective" class="anchor" href="#effective"><span class="octicon octicon-link"></span></a>Effective</h3>
+<a id="effective" class="anchor" href="#effective" aria-hidden="true"><span class="octicon octicon-link"></span></a>Effective</h3>
 
 <ul>
 <li>Log methods gracefully fall back to simpler console logging methods if more specific ones aren't available: so calls to log.debug() go to console.debug() if possible, or console.log() if not</li>
@@ -58,7 +58,7 @@
 </ul>
 
 <h3>
-<a name="convenient" class="anchor" href="#convenient"><span class="octicon octicon-link"></span></a>Convenient</h3>
+<a id="convenient" class="anchor" href="#convenient" aria-hidden="true"><span class="octicon octicon-link"></span></a>Convenient</h3>
 
 <ul>
 <li>Log output keeps line numbers: most JS logging frameworks call console.log methods through wrapper functions, clobbering your stacktrace and making the extra info many browsers provide useless. We'll have none of that thanks.</li>
@@ -69,62 +69,58 @@
 </ul>
 
 <h2>
-<a name="downloading-loglevel" class="anchor" href="#downloading-loglevel"><span class="octicon octicon-link"></span></a>Downloading loglevel</h2>
+<a id="downloading-loglevel" class="anchor" href="#downloading-loglevel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Downloading loglevel</h2>
 
 <p>If you're using NPM, you can just run <code>npm install loglevel</code>.</p>
 
 <p>Alternatively, loglevel is also available via <a href="https://github.com/bower/bower">Bower</a> (<code>bower install loglevel</code>), <a href="http://jamjs.org/packages/#/details/loglevel">JamJS</a> (<code>jam install loglevel</code>), as a <a href="http://www.webjars.org/">Webjar</a>, or an <a href="https://atmospherejs.com/spacejamio/loglevel">Atmosphere package</a> (for Meteor)</p>
 
-<p>Alternatively if you just want to grab the file yourself, you can download either the current stable <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.min.js">production version</a> or the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.js">development version</a> directly, or reference it remotely on CDNJS at <code>//cdnjs.cloudflare.com/ajax/libs/loglevel/0.6.0/loglevel.min.js</code></p>
+<p>Alternatively if you just want to grab the file yourself, you can download either the current stable <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.min.js">production version</a> or the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.js">development version</a> directly, or reference it remotely on CDNJS at <code>//cdnjs.cloudflare.com/ajax/libs/loglevel/1.2.0/loglevel.min.js</code></p>
 
 <p>Finally, if you want to tweak loglevel to your own needs or you immediately need the cutting-edge version, clone this repo and see <a href="#developing--contributing">Developing &amp; Contributing</a> below for build instructions.</p>
 
 <h2>
-<a name="setting-it-up" class="anchor" href="#setting-it-up"><span class="octicon octicon-link"></span></a>Setting it up</h2>
+<a id="setting-it-up" class="anchor" href="#setting-it-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting it up</h2>
 
 <p>loglevel supports AMD (e.g. RequireJS), CommonJS (e.g. Node.js) and direct usage (e.g. loading globally with a &lt;script&gt; tag) loading methods. You should be able to do nearly anything, and then skip to the next section anyway and have it work. Just in case though, here's some specific examples that definitely do the right thing:</p>
 
 <h3>
-<a name="commonsjs-eg-node" class="anchor" href="#commonsjs-eg-node"><span class="octicon octicon-link"></span></a>CommonsJS (e.g. Node)</h3>
+<a id="commonsjs-eg-node" class="anchor" href="#commonsjs-eg-node" aria-hidden="true"><span class="octicon octicon-link"></span></a>CommonsJS (e.g. Node)</h3>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'loglevel'</span><span class="p">);</span>
-<span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">"unreasonably simple"</span><span class="p">);</span>
-</pre></div>
-
-<h3>
-<a name="amd-eg-requirejs" class="anchor" href="#amd-eg-requirejs"><span class="octicon octicon-link"></span></a>AMD (e.g. RequireJS)</h3>
-
-<div class="highlight highlight-javascript"><pre><span class="nx">define</span><span class="p">([</span><span class="s1">'loglevel'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">log</span><span class="p">)</span> <span class="p">{</span>
-   <span class="nx">log</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">"dangerously convenient"</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> log <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>loglevel<span class="pl-pds">'</span></span>);
+log<span class="pl-c1">.info</span>(<span class="pl-s"><span class="pl-pds">"</span>unreasonably simple<span class="pl-pds">"</span></span>);</pre></div>
 
 <h3>
-<a name="directly-in-your-web-page" class="anchor" href="#directly-in-your-web-page"><span class="octicon octicon-link"></span></a>Directly in your web page:</h3>
+<a id="amd-eg-requirejs" class="anchor" href="#amd-eg-requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>AMD (e.g. RequireJS)</h3>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"loglevel.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script&gt;</span>
-<span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"too easy"</span><span class="p">);</span>
-<span class="nt">&lt;/script&gt;</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre>define([<span class="pl-s"><span class="pl-pds">'</span>loglevel<span class="pl-pds">'</span></span>], <span class="pl-k">function</span>(<span class="pl-smi">log</span>) {
+   log<span class="pl-c1">.warn</span>(<span class="pl-s"><span class="pl-pds">"</span>dangerously convenient<span class="pl-pds">"</span></span>);
+});</pre></div>
 
 <h3>
-<a name="with-noconflict" class="anchor" href="#with-noconflict"><span class="octicon octicon-link"></span></a>With noConflict():</h3>
+<a id="directly-in-your-web-page" class="anchor" href="#directly-in-your-web-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directly in your web page:</h3>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>loglevel.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">log<span class="pl-c1">.error</span>(<span class="pl-s"><span class="pl-pds">"</span>too easy<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<h3>
+<a id="with-noconflict" class="anchor" href="#with-noconflict" aria-hidden="true"><span class="octicon octicon-link"></span></a>With noConflict():</h3>
 
 <p>If you're using another JavaScript library that exposes a 'log' global, you can run into conflicts with loglevel.  Similarly to jQuery, you can solve this by putting loglevel into no-conflict mode immediately after it is loaded onto the page. This resets to 'log' global to its value before loglevel was loaded (typically <code>undefined</code>), and returns the loglevel object, which you can then bind to another name yourself.</p>
 
 <p>For example:</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"loglevel.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script&gt;</span>
-<span class="kd">var</span> <span class="nx">logging</span> <span class="o">=</span> <span class="nx">log</span><span class="p">.</span><span class="nx">noConflict</span><span class="p">();</span>
-
-<span class="nx">logging</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"still pretty easy"</span><span class="p">);</span>
-<span class="nt">&lt;/script&gt;</span>
-</pre></div>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>loglevel.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"><span class="pl-k">var</span> logging <span class="pl-k">=</span> log.noConflict();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">logging<span class="pl-c1">.error</span>(<span class="pl-s"><span class="pl-pds">"</span>still pretty easy<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
 <h2>
-<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p>The loglevel API is extremely minimal. All methods are available on the root loglevel object, which it's suggested you name 'log' (this is the default if you import it in globally, and is what's set up in the above examples). The API consists of:</p>
 
@@ -145,7 +141,7 @@
 <p>These methods should never fail in any environment, even if no console object is currently available, and should always fall back to an available log method even if the specific method called (e.g. warn) isn't available.</p>
 </li>
 <li>
-<p>A <code>log.setLevel(level)</code> method.</p>
+<p>A <code>log.setLevel(level, [persist])</code> method.</p>
 
 <p>This disables all logging below the given level, so that after a log.setLevel("warn") call log.warn("something") or log.error("something") will output messages, but log.info("something") will not.</p>
 
@@ -160,7 +156,7 @@
 </li>
 </ul>
 
-<p>Where possible the log level will be persisted. LocalStorage will be used if available, falling back to cookies if not. If neither is available in the current environment (i.e. in Node) persistence will be skipped.</p>
+<p>Where possible the log level will be persisted. LocalStorage will be used if available, falling back to cookies if not. If neither is available in the current environment (i.e. in Node), or if you pass <code>false</code> as the optional 'persist' second argument, persistence will be skipped.</p>
 
 <p>If log.setLevel() is called when a console object is not available (in IE 8 or 9 before the developer tools have been opened, for example) logging will remain silent until the console becomes available, and then begin logging at the requested level.</p>
 </li>
@@ -172,7 +168,15 @@
 </ul>
 
 <h2>
-<a name="plugins" class="anchor" href="#plugins"><span class="octicon octicon-link"></span></a>Plugins</h2>
+<a id="plugins" class="anchor" href="#plugins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plugins</h2>
+
+<h3>
+<a id="existing-plugins" class="anchor" href="#existing-plugins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Existing plugins:</h3>
+
+<p>ServerSend - <a href="https://github.com/artemyarulin/loglevel-serverSend">https://github.com/artemyarulin/loglevel-serverSend</a> - Forward your log messages to a remote server</p>
+
+<h3>
+<a id="writing-plugins" class="anchor" href="#writing-plugins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Writing plugins:</h3>
 
 <p>Loglevel provides a simple reliable minimal base for console logging that works everywhere. This means it doesn't include lots of fancy functionality that might be useful in some cases, such as log formatting and redirection (e.g. also sending log messages to a server over AJAX)</p>
 
@@ -182,20 +186,20 @@
 
 <p>For example, a plugin to prefix all log messages with "Newsflash: " would look like:</p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">originalFactory</span> <span class="o">=</span> <span class="nx">log</span><span class="p">.</span><span class="nx">methodFactory</span><span class="p">;</span>
-<span class="nx">log</span><span class="p">.</span><span class="nx">methodFactory</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">methodName</span><span class="p">,</span> <span class="nx">logLevel</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">rawMethod</span> <span class="o">=</span> <span class="nx">originalFactory</span><span class="p">(</span><span class="nx">methodName</span><span class="p">,</span> <span class="nx">logLevel</span><span class="p">);</span>
+<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> originalFactory <span class="pl-k">=</span> log.methodFactory;
+<span class="pl-c1">log</span>.<span class="pl-en">methodFactory</span> <span class="pl-k">=</span> <span class="pl-k">function</span> (<span class="pl-smi">methodName</span>, <span class="pl-smi">logLevel</span>) {
+    <span class="pl-k">var</span> rawMethod <span class="pl-k">=</span> originalFactory(methodName, logLevel);
 
-    <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">rawMethod</span><span class="p">(</span><span class="s2">"Newsflash: "</span> <span class="o">+</span> <span class="nx">message</span><span class="p">);</span>
-    <span class="p">};</span>
-<span class="p">};</span>
-</pre></div>
+    <span class="pl-k">return</span> <span class="pl-k">function</span> (<span class="pl-smi">message</span>) {
+        rawMethod(<span class="pl-s"><span class="pl-pds">"</span>Newsflash: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> message);
+    };
+};
+log.setLevel(<span class="pl-s"><span class="pl-pds">"</span>warn<span class="pl-pds">"</span></span>); <span class="pl-c">// Be sure to call setLevel method in order to apply plugin </span></pre></div>
 
 <p>If you develop and release a plugin, please get in contact! I'd be happy to reference it here for future users. Some consistency is helpful; naming your plugin 'loglevel-PLUGINNAME' (e.g. loglevel-newsflash) is preferred, as is giving it the 'loglevel-plugin' keyword in your package.json</p>
 
 <h2>
-<a name="developing--contributing" class="anchor" href="#developing--contributing"><span class="octicon octicon-link"></span></a>Developing &amp; Contributing</h2>
+<a id="developing--contributing" class="anchor" href="#developing--contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Developing &amp; Contributing</h2>
 
 <p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality.</p>
 
@@ -204,7 +208,7 @@
 <p><em>Also, please don't manually edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!</em></p>
 
 <h4>
-<a name="release-process" class="anchor" href="#release-process"><span class="octicon octicon-link"></span></a>Release process</h4>
+<a id="release-process" class="anchor" href="#release-process" aria-hidden="true"><span class="octicon octicon-link"></span></a>Release process</h4>
 
 <p>To do a release of loglevel:</p>
 
@@ -221,7 +225,7 @@
 </ul>
 
 <h2>
-<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+<a id="release-history" class="anchor" href="#release-history" aria-hidden="true"><span class="octicon octicon-link"></span></a>Release History</h2>
 
 <p>v0.1.0 - First working release with apparent compatibility with everything tested</p>
 
@@ -243,13 +247,13 @@
 
 <p>v1.2.0 - New plugin API! Plus various bits of refactoring and tidy up, nicely simplifying things and trimming the size down.</p>
 
+<p>v1.3.0 - Make persistence optional in setLevel, plus lots of documentation updates and other small tweaks</p>
+
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Copyright (c) 2013 Tim Perry<br>
 Licensed under the MIT license.</p>
-
-<p><a href="http://githalytics.com/pimterry/loglevel"><img src="https://cruel-carlota.pagodabox.com/3393271900ddc6808ae1901f3760a59e" alt="githalytics.com alpha"></a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/pimterry">pimterry</a></p>
