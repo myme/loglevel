@@ -45,7 +45,7 @@
 <ul>
 <li>Log things at a given level (trace/debug/info/warn/error) to the console object (as seen in all modern browsers &amp; node.js)</li>
 <li>Filter logging by level (all the above or 'silent'), so you can disable all but error logging in production, and then run log.setLevel("trace") in your console to turn it all back on for a furious debugging session</li>
-<li>Single file, no dependencies, weighs in at &lt;1KB minified and gzipped</li>
+<li>Single file, no dependencies, weighs in at 1.1KB minified and gzipped</li>
 </ul>
 
 <h3>
@@ -75,7 +75,7 @@
 
 <p>Alternatively, loglevel is also available via <a href="https://github.com/bower/bower">Bower</a> (<code>bower install loglevel</code>), <a href="http://jamjs.org/packages/#/details/loglevel">JamJS</a> (<code>jam install loglevel</code>), as a <a href="http://www.webjars.org/">Webjar</a>, or an <a href="https://atmospherejs.com/spacejamio/loglevel">Atmosphere package</a> (for Meteor)</p>
 
-<p>Alternatively if you just want to grab the file yourself, you can download either the current stable <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.min.js">production version</a> or the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.js">development version</a> directly, or reference it remotely on CDNJS at <code>//cdnjs.cloudflare.com/ajax/libs/loglevel/1.2.0/loglevel.min.js</code></p>
+<p>Alternatively if you just want to grab the file yourself, you can download either the current stable <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.min.js">production version</a> or the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.js">development version</a> directly, or reference it remotely on CDNJS at <code>//cdnjs.cloudflare.com/ajax/libs/loglevel/1.4.0/loglevel.min.js</code></p>
 
 <p>Finally, if you want to tweak loglevel to your own needs or you immediately need the cutting-edge version, clone this repo and see <a href="#developing--contributing">Developing &amp; Contributing</a> below for build instructions.</p>
 
@@ -93,7 +93,7 @@ log<span class="pl-c1">.info</span>(<span class="pl-s"><span class="pl-pds">"</s
 <h3>
 <a id="amd-eg-requirejs" class="anchor" href="#amd-eg-requirejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>AMD (e.g. RequireJS)</h3>
 
-<div class="highlight highlight-javascript"><pre>define([<span class="pl-s"><span class="pl-pds">'</span>loglevel<span class="pl-pds">'</span></span>], <span class="pl-k">function</span>(<span class="pl-smi">log</span>) {
+<div class="highlight highlight-javascript"><pre><span class="pl-c1">define</span>([<span class="pl-s"><span class="pl-pds">'</span>loglevel<span class="pl-pds">'</span></span>], <span class="pl-k">function</span>(<span class="pl-smi">log</span>) {
    log<span class="pl-c1">.warn</span>(<span class="pl-s"><span class="pl-pds">"</span>dangerously convenient<span class="pl-pds">"</span></span>);
 });</pre></div>
 
@@ -114,7 +114,7 @@ log<span class="pl-c1">.info</span>(<span class="pl-s"><span class="pl-pds">"</s
 
 <div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>loglevel.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
 <span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
-<span class="pl-s1"><span class="pl-k">var</span> logging <span class="pl-k">=</span> log.noConflict();</span>
+<span class="pl-s1"><span class="pl-k">var</span> logging <span class="pl-k">=</span> log.<span class="pl-c1">noConflict</span>();</span>
 <span class="pl-s1"></span>
 <span class="pl-s1">logging<span class="pl-c1">.error</span>(<span class="pl-s"><span class="pl-pds">"</span>still pretty easy<span class="pl-pds">"</span></span>);</span>
 <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
@@ -161,9 +161,73 @@ log<span class="pl-c1">.info</span>(<span class="pl-s"><span class="pl-pds">"</s
 <p>If log.setLevel() is called when a console object is not available (in IE 8 or 9 before the developer tools have been opened, for example) logging will remain silent until the console becomes available, and then begin logging at the requested level.</p>
 </li>
 <li>
+<p>A <code>log.setDefaultLevel(level)</code> method.</p>
+
+<p>This sets the current log level only if one has not been persisted and can’t be loaded. This is useful when initializing scripts; if a developer or user has previously called <code>setLevel()</code>, this won’t alter their settings. For example, your application might set the log level to <code>error</code> in a production environment, but when debugging an issue, you might call <code>setLevel("trace")</code> on the console to see all the logs. If that <code>error</code> setting was set using <code>setDefaultLevel()</code>, it will still say as <code>trace</code> on subsequent page loads and refreshes instead of resetting to <code>error</code>.</p>
+
+<p>The <code>level</code> argument takes is the same values that you might pass to <code>setLevel()</code>. Levels set using <code>setDefaultLevel()</code> never persist to subsequent page loads.</p>
+</li>
+<li>
 <p><code>log.enableAll()</code> and <code>log.disableAll()</code> methods.</p>
 
 <p>These enable or disable all log messages, and are equivalent to log.setLevel("trace") and log.setLevel("silent") respectively.</p>
+</li>
+<li>
+<p>A <code>log.getLevel()</code> method.</p>
+
+<p>Returns the current logging level, as a number from 0 (trace) to 5 (silent)</p>
+
+<p>It's very unlikely you'll need to use this for normal application logging; it's provided partly to help plugin development, and partly to let you optimize logging code as below, where debug data is only generated if the level is set such that it'll actually be logged. This probably doesn't affect you, unless you've run profiling on your code and you have hard numbers telling you that your log data generation is a real performance problem.</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-k">if</span> (log.<span class="pl-c1">getLevel</span>() <span class="pl-k">&lt;=</span> log.<span class="pl-c1">levels</span>.<span class="pl-c1">DEBUG</span>) {
+  <span class="pl-k">var</span> logData <span class="pl-k">=</span> <span class="pl-c1">runExpensiveDataGeneration</span>();
+  log.<span class="pl-c1">debug</span>(logData);
+}</pre></div>
+
+<p>This notably isn't the right solution to avoid the cost of string concatenation in your logging. Firstly, it's very unlikely that string concatenation in your logging is really an important performance problem. Even if you do genuinely have hard metrics showing that it is though, the better solution that wrapping your log statements in this is to use multiple arguments, as below. The underlying console API will automatically concatenate these for you if logging is enabled, and if it isn't then all log methods are no-ops, and no concatenation will be done at all.</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-c">// Prints 'My concatenated log message'</span>
+log.<span class="pl-c1">debug</span>(<span class="pl-s"><span class="pl-pds">"</span>My <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>concatenated <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>log message<span class="pl-pds">"</span></span>);</pre></div>
+</li>
+<li>
+<p>A <code>log.getLogger(loggerName)</code> method.</p>
+
+<p>This gets you a new logger object that works exactly like the root <code>log</code> object, but can have its level and logging methods set independently. All loggers must have a name (which is a non-empty string). Calling <code>getLogger()</code> multiple times with the same name will return an identical logger object.</p>
+
+<p>In large applications, it can be incredibly useful to turn logging on and off for particular modules as you are working with them. Using the <code>getLogger()</code> method lets you create a separate logger for each part of your application with its own logging level.</p>
+
+<p>Likewise, for small, independent modules, using a named logger instead of the default root logger allows developers using your module to selectively turn on deep, trace-level logging when trying to debug problems, while logging only errors or silencing logging altogether under normal circumstances.</p>
+
+<p>Example usage <em>(using CommonJS modules, but you could do the same with any module system):</em></p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-c">// In module-one.js:</span>
+<span class="pl-k">var</span> log <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>loglevel<span class="pl-pds">"</span></span>).<span class="pl-c1">getLogger</span>(<span class="pl-s"><span class="pl-pds">"</span>module-one<span class="pl-pds">"</span></span>);
+<span class="pl-k">function</span> <span class="pl-en">doSomethingAmazing</span>() {
+  log.<span class="pl-c1">debug</span>(<span class="pl-s"><span class="pl-pds">"</span>Amazing message from module one.<span class="pl-pds">"</span></span>);
+}
+
+<span class="pl-c">// In module-two.js:</span>
+<span class="pl-k">var</span> log <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>loglevel<span class="pl-pds">"</span></span>).<span class="pl-c1">getLogger</span>(<span class="pl-s"><span class="pl-pds">"</span>module-two<span class="pl-pds">"</span></span>);
+<span class="pl-k">function</span> <span class="pl-en">doSomethingSpecial</span>() {
+  log.<span class="pl-c1">debug</span>(<span class="pl-s"><span class="pl-pds">"</span>Special message from module two.<span class="pl-pds">"</span></span>);
+}
+
+<span class="pl-c">// In your main application module:</span>
+<span class="pl-k">var</span> log <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>loglevel<span class="pl-pds">"</span></span>);
+<span class="pl-k">var</span> moduleOne <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>module-one<span class="pl-pds">"</span></span>);
+<span class="pl-k">var</span> moduleTwo <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>module-two<span class="pl-pds">"</span></span>);
+log.<span class="pl-c1">getLogger</span>(<span class="pl-s"><span class="pl-pds">"</span>module-two<span class="pl-pds">"</span></span>).<span class="pl-c1">setLevel</span>(<span class="pl-s"><span class="pl-pds">"</span>TRACE<span class="pl-pds">"</span></span>);
+
+moduleOne.<span class="pl-c1">doSomethingAmazing</span>();
+moduleTwo.<span class="pl-c1">doSomethingSpecial</span>();
+<span class="pl-c">// logs "Special message from module two."</span>
+<span class="pl-c">// (but nothing from module one.)</span></pre></div>
+
+<p>Loggers returned by <code>getLogger()</code> support all the same properties and methods as the default root logger, excepting <code>noConflict()</code> and the <code>getLogger()</code> method itself.</p>
+
+<p>Like the root logger, other loggers can have their logging level saved. If a logger’s level has not been saved, it will inherit the root logger’s level when it is first created. If the root logger’s level changes later, the new level will not affect other loggers that have already been created.</p>
+
+<p>Likewise, loggers will inherit the root logger’s <code>methodFactory</code>. After creation, each logger can have its <code>methodFactory</code> independently set. See the <em>plugins</em> section below for more about <code>methodFactory</code>.</p>
 </li>
 </ul>
 
@@ -180,21 +244,21 @@ log<span class="pl-c1">.info</span>(<span class="pl-s"><span class="pl-pds">"</s
 
 <p>Loglevel provides a simple reliable minimal base for console logging that works everywhere. This means it doesn't include lots of fancy functionality that might be useful in some cases, such as log formatting and redirection (e.g. also sending log messages to a server over AJAX)</p>
 
-<p>Including that would increase the size and complexity of the library, but more importantly would remove stacktrace information. Currently log methods are either disabled, or enabled with directly bound versions of the console.log methods (where possible). This means your browser shows the log message as coming from your code at the call to <code>log.info("message!")</code> not from within loglevel, since it's really calls the bound console method directly, without indirection. The indirection required to dynamically format, further filter, or redirect log messages would stop this.</p>
+<p>Including that would increase the size and complexity of the library, but more importantly would remove stacktrace information. Currently log methods are either disabled, or enabled with directly bound versions of the console.log methods (where possible). This means your browser shows the log message as coming from your code at the call to <code>log.info("message!")</code> not from within loglevel, since it really calls the bound console method directly, without indirection. The indirection required to dynamically format, further filter, or redirect log messages would stop this.</p>
 
-<p>There's clearly enough enthusiasm for this even at that cost though that loglevel now includes a plugin API. To use it, redefine log.methodFactory(methodName, logLevel) with a function of your own. This will be called for each enabled method each time the level is set (including initially), and should return a function to be used for the given log method, at the given level. If you'd like to retain all the reliability and features of loglevel, it's recommended that this wraps the initially provided value of <code>log.methodFactory</code></p>
+<p>There's clearly enough enthusiasm for this even at that cost though that loglevel now includes a plugin API. To use it, redefine log.methodFactory(methodName, logLevel, loggerName) with a function of your own. This will be called for each enabled method each time the level is set (including initially), and should return a function to be used for the given log method, at the given level, for a logger with the given name. If you'd like to retain all the reliability and features of loglevel, it's recommended that this wraps the initially provided value of <code>log.methodFactory</code></p>
 
 <p>For example, a plugin to prefix all log messages with "Newsflash: " would look like:</p>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> originalFactory <span class="pl-k">=</span> log.methodFactory;
-<span class="pl-c1">log</span>.<span class="pl-en">methodFactory</span> <span class="pl-k">=</span> <span class="pl-k">function</span> (<span class="pl-smi">methodName</span>, <span class="pl-smi">logLevel</span>) {
-    <span class="pl-k">var</span> rawMethod <span class="pl-k">=</span> originalFactory(methodName, logLevel);
+<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> originalFactory <span class="pl-k">=</span> log.<span class="pl-c1">methodFactory</span>;
+<span class="pl-c1">log</span>.<span class="pl-en">methodFactory</span> <span class="pl-k">=</span> <span class="pl-k">function</span> (<span class="pl-smi">methodName</span>, <span class="pl-smi">logLevel</span>, <span class="pl-smi">loggerName</span>) {
+    <span class="pl-k">var</span> rawMethod <span class="pl-k">=</span> <span class="pl-c1">originalFactory</span>(methodName, logLevel, loggerName);
 
     <span class="pl-k">return</span> <span class="pl-k">function</span> (<span class="pl-smi">message</span>) {
-        rawMethod(<span class="pl-s"><span class="pl-pds">"</span>Newsflash: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> message);
+        <span class="pl-c1">rawMethod</span>(<span class="pl-s"><span class="pl-pds">"</span>Newsflash: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> message);
     };
 };
-log.setLevel(<span class="pl-s"><span class="pl-pds">"</span>warn<span class="pl-pds">"</span></span>); <span class="pl-c">// Be sure to call setLevel method in order to apply plugin </span></pre></div>
+log.<span class="pl-c1">setLevel</span>(<span class="pl-s"><span class="pl-pds">"</span>warn<span class="pl-pds">"</span></span>); <span class="pl-c">// Be sure to call setLevel method in order to apply plugin</span></pre></div>
 
 <p>If you develop and release a plugin, please get in contact! I'd be happy to reference it here for future users. Some consistency is helpful; naming your plugin 'loglevel-PLUGINNAME' (e.g. loglevel-newsflash) is preferred, as is giving it the 'loglevel-plugin' keyword in your package.json</p>
 
@@ -220,8 +284,8 @@ log.setLevel(<span class="pl-s"><span class="pl-pds">"</span>warn<span class="pl
 <li>Push to Github</li>
 <li>Run <code>npm publish .</code> to publish to NPM</li>
 <li>Run <code>jam publish</code> to publish to JamJS</li>
+<li>Update CDN url once <a href="https://cdnjs.com/libraries/loglevel">https://cdnjs.com/libraries/loglevel</a> picks up the new version</li>
 <li>Autoupdate gh-pages docs</li>
-<li>Open a pull request to <a href="https://github.com/cdnjs/cdnjs">https://github.com/cdnjs/cdnjs</a> to put the new release on the CDN</li>
 </ul>
 
 <h2>
@@ -248,6 +312,10 @@ log.setLevel(<span class="pl-s"><span class="pl-pds">"</span>warn<span class="pl
 <p>v1.2.0 - New plugin API! Plus various bits of refactoring and tidy up, nicely simplifying things and trimming the size down.</p>
 
 <p>v1.3.0 - Make persistence optional in setLevel, plus lots of documentation updates and other small tweaks</p>
+
+<p>v1.3.1 - With the new optional persistence, stop unnecessarily persisting the initially set default level (warn)</p>
+
+<p>v1.4.0 - Add getLevel(), setDefaultLevel() and getLogger() functionality for more fine-grained log level control</p>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
